@@ -1,0 +1,5 @@
+extends Node
+
+enum Ingredient_type {HAM, APPLE, LETTUCE, CHEESE, CARROT} 
+
+enum StationType { CRATE, CUTTING_BOARD, STOVE_PAN, STOVE_POT, OVEN, MIXING_STATION, DELIVERY_TABLE }

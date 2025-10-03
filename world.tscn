@@ -1,8 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://dwfcasrnq8116"]
+[gd_scene load_steps=3 format=3 uid="uid://dwfcasrnq8116"]
 
 [ext_resource type="Script" uid="uid://bw5m03q1l3rwq" path="res://world.gd" id="1_f3sb7"]
-[ext_resource type="Script" uid="uid://bapgn7t6gypyv" path="res://cook.gd" id="2_fj7yv"]
-[ext_resource type="Texture2D" uid="uid://cpq7grm4b2kvq" path="res://sprite/chef_v1.png" id="2_tlwt5"]
 [ext_resource type="Texture2D" uid="uid://d221sg5yokd4s" path="res://sprite/mosaic_floor.jpg" id="4_aqk2v"]
 
 [node name="World" type="Node2D"]
@@ -14,8 +12,3 @@ offset_bottom = 1500.0
 texture = ExtResource("4_aqk2v")
 expand_mode = 1
 stretch_mode = 1
-
-[node name="Cook" type="Sprite2D" parent="."]
-scale = Vector2(0.3, 0.3)
-texture = ExtResource("2_tlwt5")
-script = ExtResource("2_fj7yv")

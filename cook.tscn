@@ -1,0 +1,9 @@
+[gd_scene load_steps=3 format=3 uid="uid://lpwsrnf5xdpy"]
+
+[ext_resource type="Texture2D" uid="uid://cpq7grm4b2kvq" path="res://sprite/chef_v1.png" id="1_ciqc8"]
+[ext_resource type="Script" uid="uid://bapgn7t6gypyv" path="res://cook.gd" id="2_lgwpa"]
+
+[node name="cook" type="Sprite2D"]
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("1_ciqc8")
+script = ExtResource("2_lgwpa")
