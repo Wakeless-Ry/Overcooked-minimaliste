@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="Recette" load_steps=2 format=3 uid="uid://sh41p6ioqe3k"]
+
+[ext_resource type="Script" uid="uid://cqharq5jc6d8e" path="res://recettes/recette.gd" id="1_0pq3w"]
+
+[resource]
+script = ExtResource("1_0pq3w")
+name = "sushi"
+ingredients = {
+"cucumber": 1,
+"fish": 1,
+"nori": 1,
+"rice": 1
+}
+steps = {
+["", "station_cucumber"]: [],
+["", "station_fish"]: [],
+["", "station_nori"]: [],
+["", "station_rice"]: [],
+["", "sushi_in_plate"]: [["cooked_rice", "table_cook"], ["fish_cut", "table_cut"], ["cucumber_cut", "table_cut"], ["nori", "station_nori"]],
+["cooked_rice", "caisse_rice"]: [["", "station_rice"]],
+["cucumber_cut", "table_cut"]: [["", "station_cucumber"]],
+["fish_cut", "table_cut"]: [["", "station_fish"]],
+["sushi_in_plate", "table"]: [["", "sushi_in_plate"]]
+}
