@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dj7l3bpuuca7k"
-path="res://.godot/imported/pomme.png-ae8678ece03ab63c3cbce0e622b7bd2e.ctex"
+uid="uid://c4vhs3s8n5rsv"
+path="res://.godot/imported/soup.png-6eb86bd10eec6ad4a88b3e13865dbab7.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/pomme.png"
-dest_files=["res://.godot/imported/pomme.png-ae8678ece03ab63c3cbce0e622b7bd2e.ctex"]
+source_file="res://sprite/soup.png"
+dest_files=["res://.godot/imported/soup.png-6eb86bd10eec6ad4a88b3e13865dbab7.ctex"]
 
 [params]
 

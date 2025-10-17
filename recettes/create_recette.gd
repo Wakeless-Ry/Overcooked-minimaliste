@@ -1,24 +1,30 @@
 extends Node
 
 func _ready():
-	var recette_name_soupe = "soupe"
+	var recette_name_soupe = "SOUP"
 	
 	var recette_steps_soupe = {
-		["soupe_in_plate", "table"]: [["", "soupe_in_plate"]],
+		"OBJECTIVE": ["SOUP", "DELIVERY_TABLE"],
+		["SOUP", "DELIVERY_TABLE"]: [["", "STOVE_POT", ["TOMATO_CUT", "LETTUCE_CUT", "POTATO_CUT"]]],
 		
-		["", "soupe_in_plate"]: [
-			["TOMATO_cut", "stove_pot"],
-			["onion_cut", "stove_pot"],
-			["potato_cut", "stove_pot"]
+		["", "STOVE_POT", ["TOMATO_CUT", "LETTUCE_CUT", "POTATO_CUT"]]: [
+			["TOMATO_CUT", "STOVE_POT"],
+			["LETTUCE_CUT", "STOVE_POT"],
+			["POTATO_CUT", "STOVE_POT"]
 		],
 		
-		["TOMATO_cut", "table_cut"]: [["", "crate_TOMATO"]],
-		["onion_cut", "table_cut"]: [["", "crate_onion"]],
-		["potato_cut", "table_cut"]: [["", "crate_potato"]],
+		["TOMATO_CUT", "STOVE_POT"]: [["", "TOMATO_CUT"]],
+		["", "TOMATO_CUT"]: [["TOMATO", "CUTTING_BOARD"]],
 		
-		["", "crate_TOMATO"]: [],
-		["", "crate_onion"]: [],
-		["", "crate_potato"]: []
+		["LETTUCE_CUT", "STOVE_POT"]: [["", "LETTUCE_CUT"]],
+		["", "LETTUCE_CUT"]: [["LETTUCE", "CUTTING_BOARD"]],
+		
+		["POTATO_CUT", "STOVE_POT"]: [["", "POTATO_CUT"]],
+		["", "POTATO_CUT"]: [["POTATO", "CUTTING_BOARD"]],
+		
+		["TOMATO", "CUTTING_BOARD"]: [["", "CRATE_TOMATO"]],
+		["LETTUCE", "CUTTING_BOARD"]: [["", "CRATE_LETTUCE"]],
+		["POTATO", "CUTTING_BOARD"]: [["", "CRATE_POTATO"]],
 	}
 	
 	var recette_name_burger = "BURGER"

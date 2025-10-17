@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://eao6epl851pl"
-path="res://.godot/imported/ham.png-b2ce76d2434d4a9ca6367859c04f3158.ctex"
+uid="uid://barvrggipagh5"
+path="res://.godot/imported/bread.png-aa6f1372f67ed26acef9304e300bd968.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/ham.png"
-dest_files=["res://.godot/imported/ham.png-b2ce76d2434d4a9ca6367859c04f3158.ctex"]
+source_file="res://sprite/bread.png"
+dest_files=["res://.godot/imported/bread.png-aa6f1372f67ed26acef9304e300bd968.ctex"]
 
 [params]
 

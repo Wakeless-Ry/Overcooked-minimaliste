@@ -1,14 +1,19 @@
-[gd_scene load_steps=7 format=3 uid="uid://dsxduajy4lwiu"]
+[gd_scene load_steps=12 format=3 uid="uid://dsxduajy4lwiu"]
 
 [ext_resource type="Script" uid="uid://darehf17n8fk" path="res://ingredient.gd" id="1_11e83"]
-[ext_resource type="Texture2D" uid="uid://eao6epl851pl" path="res://sprite/ham.png" id="2_n8app"]
-[ext_resource type="Texture2D" uid="uid://dj7l3bpuuca7k" path="res://sprite/pomme.png" id="3_luq5u"]
+[ext_resource type="Texture2D" uid="uid://t5uh1ymlcyjh" path="res://sprite/beef.png" id="2_21dxx"]
+[ext_resource type="Texture2D" uid="uid://dsi15m7dkc2oi" path="res://sprite/tomato.png" id="3_luq5u"]
 [ext_resource type="Texture2D" uid="uid://pth8383hs4x0" path="res://sprite/cabage.png" id="4_21dxx"]
 [ext_resource type="Texture2D" uid="uid://bg0qsm4rrrshx" path="res://sprite/cheese.png" id="5_ngxxb"]
 [ext_resource type="Texture2D" uid="uid://n5jsw1rf25l7" path="res://sprite/carrot.png" id="6_luq5u"]
+[ext_resource type="Texture2D" uid="uid://barvrggipagh5" path="res://sprite/bread.png" id="7_21dxx"]
+[ext_resource type="Texture2D" uid="uid://ka4tmkluxy1f" path="res://sprite/potato.png" id="8_ngxxb"]
+[ext_resource type="Texture2D" uid="uid://b7n460asncy58" path="res://sprite/burger.png" id="9_mwf5c"]
+[ext_resource type="Texture2D" uid="uid://c4vhs3s8n5rsv" path="res://sprite/soup.png" id="10_gr20n"]
+[ext_resource type="Texture2D" uid="uid://cf3div6rqnpas" path="res://sprite/sushi.png" id="11_magpw"]
 
 [node name="Ingredient" type="Node2D"]
 script = ExtResource("1_11e83")
-textures = Array[Texture2D]([ExtResource("2_n8app"), ExtResource("3_luq5u"), ExtResource("4_21dxx"), ExtResource("5_ngxxb"), ExtResource("6_luq5u")])
+textures = Array[Texture2D]([ExtResource("2_21dxx"), ExtResource("3_luq5u"), ExtResource("4_21dxx"), ExtResource("5_ngxxb"), ExtResource("6_luq5u"), ExtResource("7_21dxx"), ExtResource("8_ngxxb"), ExtResource("9_mwf5c"), ExtResource("10_gr20n"), ExtResource("11_magpw")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

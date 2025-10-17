@@ -14,7 +14,8 @@ var content = null
 var inventory = []
 
 var ingrDict = {
-	"BURGER" : ["BREAD", "COOKED_BEEF", "LETTUCE_CUT", "CHEESE", "TOMATO_CUT"]
+	"BURGER" : ["BREAD", "COOKED_BEEF", "LETTUCE_CUT", "CHEESE", "TOMATO_CUT"],
+	"SOUP" : ["LETTUCE_CUT", "POTATO_CUT", "TOMATO_CUT"],
 }
 
 func _ready():
@@ -48,14 +49,13 @@ func update_sprite(ingredient_type):
 		Enum.StationType.MIXING_STATION:
 			adjust_size(75, textures[4])
 		Enum.StationType.DELIVERY_TABLE:
-			adjust_size(75, textures[4])
+			adjust_size(200, textures[4])
 		Enum.StationType.PLATE:
-			adjust_size(50, textures[6])
+			adjust_size(100, textures[6])
 		_:
 			pass
 
 func interact(item):
-	print("=====================================")
 	match station_type:
 		Enum.StationType.CRATE:
 			if item == "":
@@ -66,12 +66,15 @@ func interact(item):
 					return "LETTUCE_CUT"
 				"TOMATO":
 					return "TOMATO_CUT"
+				"POTATO":
+					return "POTATO_CUT"
 		Enum.StationType.STOVE_PAN:
 			match item:
 				"BEEF":
 					return "COOKED_BEEF"
 		Enum.StationType.STOVE_POT:
-			pass
+			inventory.append(item)
+			return pot_recipe()
 		Enum.StationType.OVEN:
 			pass
 		Enum.StationType.MIXING_STATION:
@@ -86,9 +89,15 @@ func interact(item):
 	return ""
 		
 func plate_recipe():
-	if lists_have_same_items_with_counts(inventory, ["BREAD", "COOKED_BEEF", "LETTUCE_CUT", "CHEESE", "TOMATO_CUT"]):
+	if lists_have_same_items_with_counts(inventory, ingrDict["BURGER"]):
 		inventory = []
 		return "BURGER"
+	return ""
+	
+func pot_recipe():
+	if lists_have_same_items_with_counts(inventory, ingrDict["SOUP"]):
+		inventory = []
+		return "SOUP"
 	return ""
 
 func has_inventory(other):

@@ -1,6 +1,6 @@
 extends Node2D
 
-@export var speed = 5000  # Movement speed in pixels per second
+@export var speed = 400  # Movement speed in pixels per second
 var instructions = []
 var target_ingr = null
 var state
@@ -22,7 +22,7 @@ func is_possible(step):
 		return false
 	if !kitchen.has(step[1]):
 		return false
-	if step[1] == "PLATE":
+	if step[1] == "PLATE" || step[1] == "STOVE_POT":
 		return (step.size() > 2 && kitchen[step[1]].has_inventory(step[2])) || (step[0] != "" && kitchen[step[1]].needs_ingredient(recipe_name, step[0]))
 	return true
 
@@ -37,7 +37,7 @@ func get_next_step(arbre: Dictionary, racine):
 			parcours.append_array(arbre[current])
 
 func check_plate(step):
-	if step[1] == "PLATE" && step[0] != "":
+	if (step[1] == "PLATE" || step[1] == "STOVE_POT") && step[0] != "":
 		return kitchen[step[1]].needs_ingredient(recipe_name, step[0])
 	return true
 

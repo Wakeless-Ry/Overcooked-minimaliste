@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cdrqhxn1yey5m"
-path="res://.godot/imported/plate.jpg-a4eee03deb116c615d30c7343a9e4b60.ctex"
+uid="uid://csctfq8w35b88"
+path="res://.godot/imported/cutting_board.png-0066d44e5a857db8be7456704330e37c.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://sprite/plate.jpg"
-dest_files=["res://.godot/imported/plate.jpg-a4eee03deb116c615d30c7343a9e4b60.ctex"]
+source_file="res://sprite/cutting_board.png"
+dest_files=["res://.godot/imported/cutting_board.png-0066d44e5a857db8be7456704330e37c.ctex"]
 
 [params]
 

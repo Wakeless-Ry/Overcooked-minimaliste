@@ -4,37 +4,37 @@ extends Node2D
 const Enum = preload("res://enum.gd")
 var station_scene = preload("res://station.tscn")
 var cook_scene = preload("res://cook.tscn")
+var objectif_scene = preload("res://objectif.tscn")
 
 var cook = cook_scene.instantiate()
 
 var kitchen = {}
 var cook_inventory = ""
-var recipe = load("res://recettes/BURGER.tres")
+var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres")]
+var recipe = null
+
+var objectif = null
 
 func _process(delta):
+	if recipe == null:
+		recipe = recipes.pick_random()
+	display()
+	
 	cook.give_environment(kitchen, cook_inventory, recipe)
 	var action = cook.get_agent_action(delta)
 	if action[0] == "deplacement":
 		cook.position = action[1]
 	else:
 		cook_inventory = kitchen[action[1]].interact(cook_inventory)
-	pass
-	
-#todo affichage
-#func display():
-	#var display_final = []
-	#var tmp = []
-	#var parcours = recipe[0]
-	#while parcours.size() != 0:
-		#var current = parcours.pop_front()
-		#if recipe.has(current):
-			#tmp.push_back(current)
-			#parcours.append_array(recipe[current])
-		#else:
-			#tmp.reverse()
-			#for elt in tmp:
-				#display_final.insert(0, elt)
-			#tmp.clear()
+		if action[1] == "DELIVERY_TABLE":
+			recipe = recipes.pick_random()
+
+func display():
+	if objectif != null:
+		remove_child(objectif)
+	objectif = objectif_scene.instantiate()
+	objectif.adjust_size(50, Enum.dictIngredient[recipe.name])
+	add_child(objectif)
 
 func _ready():
 	add_child(cook)
@@ -45,17 +45,19 @@ func _ready():
 
 	spawn_station("CUTTING_BOARD", Vector2(650, 100))
 	spawn_station("DELIVERY_TABLE", Vector2(100, 300))
-	spawn_station("MIXING_STATION", Vector2(400, 500))
+	#spawn_station("MIXING_STATION", Vector2(400, 500))
 	spawn_station("OVEN", Vector2(200, 100))
 	spawn_station("STOVE_PAN", Vector2(350, 100))
 	spawn_station("STOVE_POT", Vector2(500, 100))
 	spawn_station("PLATE", Vector2(400, 500))
 	
-	spawn_station("CRATE", Vector2(1000, 100), "BEEF")
-	spawn_station("CRATE", Vector2(1000, 500), "TOMATO")
+	spawn_station("CRATE", Vector2(1000, 50), "BEEF")
+	spawn_station("CRATE", Vector2(1000, 125), "TOMATO")
 	spawn_station("CRATE", Vector2(1000, 200), "LETTUCE")
-	spawn_station("CRATE", Vector2(1000, 300), "CHEESE")
-	spawn_station("CRATE", Vector2(1000, 400), "BREAD")
+	spawn_station("CRATE", Vector2(1000, 275), "CHEESE")
+	spawn_station("CRATE", Vector2(1000, 350), "BREAD")
+	spawn_station("CRATE", Vector2(1000, 425), "CARROT")
+	spawn_station("CRATE", Vector2(1000, 500), "POTATO")
 	
 	kitchen["COOK"] = cook
 
