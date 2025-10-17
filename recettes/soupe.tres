@@ -1,0 +1,22 @@
+[gd_resource type="Resource" script_class="Recette" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://recettes/recette.gd" id="1_wvrrj"]
+
+[resource]
+script = ExtResource("1_wvrrj")
+name = "soupe"
+ingredients = {
+"onion": 1,
+"potato": 2,
+"tomato": 3
+}
+steps = {
+["", "soupe_in_plate"]: [["tomato_cut", "table_cut"], ["onion_cut", "table_cut"], ["potato_cut", "table_cut"]],
+["", "station_onion"]: [],
+["", "station_potato"]: [],
+["", "station_tomato"]: [],
+["onion_cut", "table_cut"]: [["", "station_onion"]],
+["potato_cut", "table_cut"]: [["", "station_potato"]],
+["soupe_in_plate", "table"]: [["", "soupe_in_plate"]],
+["tomato_cut", "table_cut"]: [["", "station_tomato"]]
+}
