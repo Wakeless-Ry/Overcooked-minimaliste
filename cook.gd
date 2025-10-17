@@ -1,5 +1,8 @@
 extends Node2D
 
+var ingredient_scene = preload("res://ingredient.tscn")
+const Enum = preload("res://enum.gd")
+
 @export var speed = 400  # Movement speed in pixels per second
 var instructions = []
 var target_ingr = null
@@ -10,6 +13,8 @@ var kitchen
 var inventory
 var recipe
 var recipe_name
+
+var ingredient
 
 func _ready():
 	position = Vector2(500, 500)
@@ -42,12 +47,25 @@ func check_plate(step):
 	return true
 
 func give_environment(kitchen_env, inventory_env, recipe_env):
+	var old = inventory
 	kitchen = kitchen_env
 	inventory = inventory_env
 	recipe = recipe_env.steps
 	recipe_name = recipe_env.name
 	var current = get_next_step(recipe, recipe["OBJECTIVE"])
 	state = current[1]
+	
+	if ingredient != null:
+		ingredient.position = Vector2(-100, 0)
+		if (inventory != old):
+			remove_child(ingredient)
+			ingredient = null
+	
+	if (inventory != "" && inventory != old) && ingredient == null:
+		ingredient = ingredient_scene.instantiate()
+		add_child(ingredient)
+		ingredient.adjust_size(150, Enum.dictIngredient[inventory])
+		
 
 func get_agent_action(delta):
 	var direction = (kitchen[state].position - position).normalized()

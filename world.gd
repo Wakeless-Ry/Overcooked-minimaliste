@@ -36,9 +36,7 @@ func display():
 	objectif.adjust_size(50, Enum.dictIngredient[recipe.name])
 	add_child(objectif)
 
-func _ready():
-	add_child(cook)
-	
+func _ready():	
 	if station_scene == null:
 		push_error("station_scene non assignée : glisse station.tscn dans l'inspecteur")
 		return
@@ -58,6 +56,8 @@ func _ready():
 	spawn_station("CRATE", Vector2(1000, 350), "BREAD")
 	spawn_station("CRATE", Vector2(1000, 425), "CARROT")
 	spawn_station("CRATE", Vector2(1000, 500), "POTATO")
+	
+	add_child(cook)
 	
 	kitchen["COOK"] = cook
 

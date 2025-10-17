@@ -1,6 +1,6 @@
 extends Node
 
-enum Ingredient_type {HAM, TOMATO, LETTUCE, CHEESE, CARROT, BREAD, POTATO, BURGER, SOUP, SUSHI} 
+enum Ingredient_type {HAM, TOMATO, LETTUCE, CHEESE, CARROT, BREAD, POTATO, BURGER, SOUP, SUSHI, COOKED_BEEF, TOMATO_CUT, LETTUCE_CUT, POTATO_CUT} 
 
 const dictIngredient = {
 	"BEEF": Ingredient_type.HAM,
@@ -13,6 +13,10 @@ const dictIngredient = {
 	"BURGER": Ingredient_type.BURGER,
 	"SOUP": Ingredient_type.SOUP,
 	"SUSHI": Ingredient_type.SUSHI,
+	"COOKED_BEEF": Ingredient_type.COOKED_BEEF,
+	"TOMATO_CUT": Ingredient_type.TOMATO_CUT,
+	"LETTUCE_CUT": Ingredient_type.LETTUCE_CUT,
+	"POTATO_CUT": Ingredient_type.POTATO_CUT,
 }
 
 enum StationType { CRATE, CUTTING_BOARD, STOVE_PAN, STOVE_POT, OVEN, MIXING_STATION, DELIVERY_TABLE, PLATE }
