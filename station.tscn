@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dncikfhnllhob"]
+[gd_scene load_steps=9 format=3 uid="uid://dncikfhnllhob"]
 
 [ext_resource type="Script" uid="uid://lfvsqml1jk6p" path="res://station.gd" id="1_lu35c"]
 [ext_resource type="Texture2D" uid="uid://c3a2ywyih8rkt" path="res://sprite/gazinière.png" id="2_72kuv"]
@@ -7,9 +7,10 @@
 [ext_resource type="Texture2D" uid="uid://5gy7ne4ywx4v" path="res://sprite/crate.png" id="5_bmuap"]
 [ext_resource type="Texture2D" uid="uid://kof5gsm70t37" path="res://sprite/table.png" id="6_7imi8"]
 [ext_resource type="Texture2D" uid="uid://xjhetb6frjep" path="res://sprite/pfanne-coloured.png" id="7_yr24d"]
+[ext_resource type="Texture2D" uid="uid://cdrqhxn1yey5m" path="res://sprite/plate.jpg" id="8_qalsi"]
 
 [node name="Station" type="Node2D"]
 script = ExtResource("1_lu35c")
-textures = Array[Texture2D]([ExtResource("2_72kuv"), ExtResource("3_qalsi"), ExtResource("4_87b1w"), ExtResource("5_bmuap"), ExtResource("6_7imi8"), ExtResource("7_yr24d")])
+textures = Array[Texture2D]([ExtResource("2_72kuv"), ExtResource("3_qalsi"), ExtResource("4_87b1w"), ExtResource("5_bmuap"), ExtResource("6_7imi8"), ExtResource("7_yr24d"), ExtResource("8_qalsi")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

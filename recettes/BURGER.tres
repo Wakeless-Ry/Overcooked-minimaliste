@@ -1,0 +1,23 @@
+[gd_resource type="Resource" script_class="Recette" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://recettes/recette.gd" id="1_tegna"]
+
+[resource]
+script = ExtResource("1_tegna")
+name = "BURGER"
+steps = {
+"OBJECTIVE": ["BURGER", "DELIVERY_TABLE"],
+["", "COOKED_BEEF"]: [["BEEF", "STOVE_PAN"]],
+["", "LETTUCE_CUT"]: [["LETTUCE", "CUTTING_BOARD"]],
+["", "PLATE", ["BREAD", "BREAD", "COOKED_BEEF", "TOMATO_CUT", "LETTUCE_CUT", "CHEESE"]]: [["BREAD", "PLATE"], ["COOKED_BEEF", "PLATE"], ["TOMATO_CUT", "PLATE"], ["LETTUCE_CUT", "PLATE"], ["CHEESE", "PLATE"]],
+["", "TOMATO_CUT"]: [["TOMATO", "CUTTING_BOARD"]],
+["BEEF", "STOVE_PAN"]: [["", "CRATE_BEEF"]],
+["BREAD", "PLATE"]: [["", "CRATE_BREAD"]],
+["BURGER", "DELIVERY_TABLE"]: [["", "PLATE", ["BREAD", "BREAD", "COOKED_BEEF", "TOMATO_CUT", "LETTUCE_CUT", "CHEESE"]]],
+["CHEESE", "PLATE"]: [["", "CRATE_CHEESE"]],
+["COOKED_BEEF", "PLATE"]: [["", "COOKED_BEEF"]],
+["LETTUCE", "CUTTING_BOARD"]: [["", "CRATE_LETTUCE"]],
+["LETTUCE_CUT", "PLATE"]: [["", "LETTUCE_CUT"]],
+["TOMATO", "CUTTING_BOARD"]: [["", "CRATE_TOMATO"]],
+["TOMATO_CUT", "PLATE"]: [["", "TOMATO_CUT"]]
+}

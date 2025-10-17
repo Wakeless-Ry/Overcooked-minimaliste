@@ -9,19 +9,7 @@ var cook = cook_scene.instantiate()
 
 var kitchen = {}
 var cook_inventory = ""
-var recipe = {
-	["PLATE_BURGER", "TABLE"]: [["", "PLATE_BURGER"]],
-	["", "PLATE_BURGER"]: [["COOKED_BEEF", "ASSIETTE"], ["CUT_TOMATO", "ASSIETTE"], ["CUT_LETTUCE", "ASSIETTE"], ["CHEESE", "ASSIETTE"], ["BREAD", "ASSIETTE"]],
-	["COOKED_BEEF", "ASSIETTE"]: [["BEEF", "CRATE_CASSEROLE"]],
-	["CUT_LETTUCE", "ASSIETTE"]: [["LETTUCE", "CUTTING_BOARD"]],
-	["CUT_TOMATO", "ASSIETTE"]: [["TOMATO", "CUTTING_BOARD"]],
-	["CHEESE", "ASSIETTE"]: [["", "CRATE_CHEESE"]],
-	["BREAD", "ASSIETTE"]: [["", "CRATE_BREAD"]],
-	["BEEF", "CRATE_CASSEROLE"]: [["", "CRATE_BEEF"]],
-	["LETTUCE", "CUTTING_BOARD"]: [["", "CRATE_LETTUCE"]],
-	["TOMATO", "CUTTING_BOARD"]: [["", "CRATE_TOMATO"]]
-}
-
+var recipe = load("res://recettes/BURGER.tres")
 
 func _process(delta):
 	cook.give_environment(kitchen, cook_inventory, recipe)
@@ -29,7 +17,7 @@ func _process(delta):
 	if action[0] == "deplacement":
 		cook.position = action[1]
 	else:
-		cook_inventory = action[1].interact(cook_inventory)
+		cook_inventory = kitchen[action[1]].interact(cook_inventory)
 	pass
 	
 #todo affichage
@@ -61,12 +49,13 @@ func _ready():
 	spawn_station("OVEN", Vector2(200, 100))
 	spawn_station("STOVE_PAN", Vector2(350, 100))
 	spawn_station("STOVE_POT", Vector2(500, 100))
+	spawn_station("PLATE", Vector2(400, 500))
 	
-	spawn_station("CRATE", Vector2(1000, 100), Enum.Ingredient_type.HAM)
-	spawn_station("CRATE", Vector2(1000, 500), Enum.Ingredient_type.APPLE)
-	spawn_station("CRATE", Vector2(1000, 200), Enum.Ingredient_type.LETTUCE)
-	spawn_station("CRATE", Vector2(1000, 300), Enum.Ingredient_type.CHEESE)
-	spawn_station("CRATE", Vector2(1000, 400), Enum.Ingredient_type.CARROT)
+	spawn_station("CRATE", Vector2(1000, 100), "BEEF")
+	spawn_station("CRATE", Vector2(1000, 500), "TOMATO")
+	spawn_station("CRATE", Vector2(1000, 200), "LETTUCE")
+	spawn_station("CRATE", Vector2(1000, 300), "CHEESE")
+	spawn_station("CRATE", Vector2(1000, 400), "BREAD")
 	
 	kitchen["COOK"] = cook
 
@@ -74,7 +63,10 @@ func spawn_station(station_type: String, pos: Vector2, secondary = null):
 	var station = station_scene.instantiate()
 	add_child(station)
 	station.position = pos
-	kitchen[station_type] = station
+	var station_key = station_type
+	if secondary != null:
+		station_key += "_" + secondary
+	kitchen[station_key] = station
 
 	match station_type:
 		"DELIVERY_TABLE":
@@ -89,7 +81,10 @@ func spawn_station(station_type: String, pos: Vector2, secondary = null):
 			station.station_type = Enum.StationType.STOVE_POT
 		"CRATE":
 			station.station_type = Enum.StationType.CRATE
+			station.content = secondary
 		"CUTTING_BOARD":
 			station.station_type = Enum.StationType.CUTTING_BOARD
+		"PLATE":
+			station.station_type = Enum.StationType.PLATE
 			
 	station.update_sprite(secondary)
