@@ -72,6 +72,11 @@ func get_agent_action(delta):
 	var distance = position.distance_to(kitchen[state].position)
 	var step = speed * delta
 
+	if direction.x >= 0:
+		self.flip_h = true
+	elif direction.x < 0:
+		self.flip_h = false
+
 	if position == kitchen[state].position:
 		return ["interagir", state]
 		
