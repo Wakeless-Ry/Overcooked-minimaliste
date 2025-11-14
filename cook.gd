@@ -16,9 +16,6 @@ var recipe_name
 
 var ingredient
 
-func _ready():
-	position = Vector2(500, 500)
-
 func add_instructions(instr_list):
 	instructions = instr_list
 
@@ -28,21 +25,22 @@ func is_possible(step):
 	if !kitchen.has(step[1]):
 		return false
 	if step[1] == "PLATE" || step[1] == "STOVE_POT":
-		return (step.size() > 2 && kitchen[step[1]].has_inventory(step[2])) || (step[0] != "" && kitchen[step[1]].needs_ingredient(recipe_name, step[0]))
+		return kitchen.has("DELIVERY_TABLE") && (step.size() > 2 && kitchen[step[1]].has_inventory(step[2])) || (step[0] != "" && kitchen[step[1]].needs_ingredient(recipe_name, step[0]))
 	return true
 
 func get_next_step(arbre: Dictionary, racine):
 	var parcours: Array = [racine]
 	while parcours.size() != 0:
 		parcours = parcours.filter(check_plate)
-		var current = parcours.pop_front()
-		if is_possible(current):
-			return current
-		if arbre.has(current):
-			parcours.append_array(arbre[current])
+		if parcours.size() != 0:
+			var current = parcours.pop_front()
+			if is_possible(current):
+				return current
+			if arbre.has(current):
+				parcours.append_array(arbre[current])
 
 func check_plate(step):
-	if (step[1] == "PLATE" || step[1] == "STOVE_POT") && step[0] != "":
+	if ((step[1] == "PLATE" && step[1] in kitchen) || (step[1] == "STOVE_POT" && step[1] in kitchen)) && step[0] != "":
 		return kitchen[step[1]].needs_ingredient(recipe_name, step[0])
 	return true
 
@@ -53,8 +51,11 @@ func give_environment(kitchen_env, inventory_env, recipe_env):
 	recipe = recipe_env.steps
 	recipe_name = recipe_env.name
 	var current = get_next_step(recipe, recipe["OBJECTIVE"])
-	state = current[1]
+	state = "waiting" if current == null else current[1]
 	
+	display_inv(old)
+
+func display_inv(old):
 	if ingredient != null:
 		ingredient.position = Vector2(-100, 0)
 		if (inventory != old):
@@ -65,9 +66,10 @@ func give_environment(kitchen_env, inventory_env, recipe_env):
 		ingredient = ingredient_scene.instantiate()
 		add_child(ingredient)
 		ingredient.adjust_size(150, Enum.dictIngredient[inventory])
-		
 
 func get_agent_action(delta):
+	if state == "waiting":
+		return [state]
 	var direction = (kitchen[state].position - position).normalized()
 	var distance = position.distance_to(kitchen[state].position)
 	var step = speed * delta

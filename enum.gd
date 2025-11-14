@@ -1,9 +1,9 @@
 extends Node
 
-enum Ingredient_type {HAM, TOMATO, LETTUCE, CHEESE, CARROT, BREAD, POTATO, BURGER, SOUP, SUSHI, COOKED_BEEF, TOMATO_CUT, LETTUCE_CUT, POTATO_CUT} 
+enum Ingredient_type {BEEF, TOMATO, LETTUCE, CHEESE, CARROT, BREAD, POTATO, BURGER, SOUP, SUSHI, COOKED_BEEF, TOMATO_CUT, LETTUCE_CUT, POTATO_CUT} 
 
 const dictIngredient = {
-	"BEEF": Ingredient_type.HAM,
+	"BEEF": Ingredient_type.BEEF,
 	"TOMATO": Ingredient_type.TOMATO,
 	"LETTUCE": Ingredient_type.LETTUCE,
 	"CHEESE": Ingredient_type.CHEESE,

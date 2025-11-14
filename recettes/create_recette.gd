@@ -5,12 +5,13 @@ func _ready():
 	
 	var recette_steps_soupe = {
 		"OBJECTIVE": ["SOUP", "DELIVERY_TABLE"],
-		["SOUP", "DELIVERY_TABLE"]: [["", "STOVE_POT", ["TOMATO_CUT", "LETTUCE_CUT", "POTATO_CUT"]]],
+		["SOUP", "DELIVERY_TABLE"]: [["", "STOVE_POT", ["TOMATO_CUT", "LETTUCE_CUT", "POTATO_CUT", "BEEF"]]],
 		
-		["", "STOVE_POT", ["TOMATO_CUT", "LETTUCE_CUT", "POTATO_CUT"]]: [
+		["", "STOVE_POT", ["TOMATO_CUT", "LETTUCE_CUT", "POTATO_CUT", "BEEF"]]: [
 			["TOMATO_CUT", "STOVE_POT"],
 			["LETTUCE_CUT", "STOVE_POT"],
-			["POTATO_CUT", "STOVE_POT"]
+			["POTATO_CUT", "STOVE_POT"],
+			["BEEF", "STOVE_POT"]
 		],
 		
 		["TOMATO_CUT", "STOVE_POT"]: [["", "TOMATO_CUT"]],
@@ -22,6 +23,7 @@ func _ready():
 		["POTATO_CUT", "STOVE_POT"]: [["", "POTATO_CUT"]],
 		["", "POTATO_CUT"]: [["POTATO", "CUTTING_BOARD"]],
 		
+		["BEEF", "STOVE_POT"]: [["", "CRATE_BEEF"]],
 		["TOMATO", "CUTTING_BOARD"]: [["", "CRATE_TOMATO"]],
 		["LETTUCE", "CUTTING_BOARD"]: [["", "CRATE_LETTUCE"]],
 		["POTATO", "CUTTING_BOARD"]: [["", "CRATE_POTATO"]],
@@ -31,9 +33,9 @@ func _ready():
 	
 	var recette_steps_burger = {
 		"OBJECTIVE": ["BURGER", "DELIVERY_TABLE"],
-		["BURGER", "DELIVERY_TABLE"]: [["", "PLATE", ["BREAD", "BREAD", "COOKED_BEEF", "TOMATO_CUT", "LETTUCE_CUT", "CHEESE"]]],
+		["BURGER", "DELIVERY_TABLE"]: [["", "PLATE", ["BREAD", "COOKED_BEEF", "TOMATO_CUT", "LETTUCE_CUT", "CHEESE"]]],
 		
-		["", "PLATE", ["BREAD", "BREAD", "COOKED_BEEF", "TOMATO_CUT", "LETTUCE_CUT", "CHEESE"]]: [
+		["", "PLATE", ["BREAD", "COOKED_BEEF", "TOMATO_CUT", "LETTUCE_CUT", "CHEESE"]]: [
 			["BREAD", "PLATE"],
 			["COOKED_BEEF", "PLATE"],
 			["TOMATO_CUT", "PLATE"],

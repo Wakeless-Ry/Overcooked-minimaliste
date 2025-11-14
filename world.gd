@@ -6,10 +6,12 @@ var station_scene = preload("res://station.tscn")
 var cook_scene = preload("res://cook.tscn")
 var objectif_scene = preload("res://objectif.tscn")
 
-var cook = cook_scene.instantiate()
+var cooks = []
+var cooks_inventory = []
+
+var nb_cooks = 2
 
 var kitchen = {}
-var cook_inventory = ""
 var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres")]
 var recipe = null
 
@@ -20,14 +22,31 @@ func _process(delta):
 		recipe = recipes.pick_random()
 	display()
 	
-	cook.give_environment(kitchen, cook_inventory, recipe)
-	var action = cook.get_agent_action(delta)
-	if action[0] == "deplacement":
-		cook.position = action[1]
-	else:
-		cook_inventory = kitchen[action[1]].interact(cook_inventory)
-		if action[1] == "DELIVERY_TABLE":
-			recipe = recipes.pick_random()
+	for i in range(nb_cooks):
+		if i == 0:
+			var new_kitchen = kitchen.duplicate()
+			new_kitchen.erase("CUTTING_BOARD")
+			new_kitchen.erase("CRATE_POTATO")
+			new_kitchen.erase("CRATE_LETTUCE")
+			new_kitchen.erase("CRATE_TOMATO")
+			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+		else:
+			var new_kitchen = kitchen.duplicate()
+			new_kitchen.erase("STOVE_PAN")
+			new_kitchen.erase("DELIVERY_TABLE")
+			new_kitchen.erase("CRATE_CHEESE")
+			new_kitchen.erase("CRATE_BEEF")
+			new_kitchen.erase("CRATE_BREAD")
+			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+		var action = cooks[i].get_agent_action(delta)
+		
+		match action[0]:
+			"deplacement":
+				cooks[i].position = action[1]
+			"interagir":
+				cooks_inventory[i] = kitchen[action[1]].interact(cooks_inventory[i])
+				if action[1] == "DELIVERY_TABLE":
+					recipe = recipes.pick_random()
 
 func display():
 	if objectif != null:
@@ -36,30 +55,34 @@ func display():
 	objectif.adjust_size(50, Enum.dictIngredient[recipe.name])
 	add_child(objectif)
 
-func _ready():	
-	if station_scene == null:
-		push_error("station_scene non assignée : glisse station.tscn dans l'inspecteur")
-		return
-
-	spawn_station("CUTTING_BOARD", Vector2(650, 100))
+func _ready():
 	spawn_station("DELIVERY_TABLE", Vector2(100, 300))
-	#spawn_station("MIXING_STATION", Vector2(400, 500))
-	spawn_station("OVEN", Vector2(200, 100))
+	
 	spawn_station("STOVE_PAN", Vector2(350, 100))
-	spawn_station("STOVE_POT", Vector2(500, 100))
-	spawn_station("PLATE", Vector2(400, 500))
 	
-	spawn_station("CRATE", Vector2(1000, 50), "BEEF")
-	spawn_station("CRATE", Vector2(1000, 125), "TOMATO")
-	spawn_station("CRATE", Vector2(1000, 200), "LETTUCE")
-	spawn_station("CRATE", Vector2(1000, 275), "CHEESE")
-	spawn_station("CRATE", Vector2(1000, 350), "BREAD")
-	spawn_station("CRATE", Vector2(1000, 425), "CARROT")
-	spawn_station("CRATE", Vector2(1000, 500), "POTATO")
+	spawn_station("CRATE", Vector2(250, 600), "CHEESE")
+	spawn_station("CRATE", Vector2(350, 600), "BEEF")
+	spawn_station("CRATE", Vector2(450, 600), "BREAD")
 	
-	add_child(cook)
+	spawn_station("STOVE_POT", Vector2(576, 216))
+	spawn_station("PLATE", Vector2(576, 432))
 	
-	kitchen["COOK"] = cook
+	spawn_station("CUTTING_BOARD", Vector2(800, 100))
+	
+	spawn_station("CRATE", Vector2(700, 600), "TOMATO")
+	spawn_station("CRATE", Vector2(800, 600), "LETTUCE")
+	spawn_station("CRATE", Vector2(900, 600), "POTATO")
+	
+	#spawn_station("OVEN", Vector2(200, 100))
+	#spawn_station("CRATE", Vector2(1000, 425), "CARROT")
+	
+	for i in range(nb_cooks):
+		var cook = cook_scene.instantiate()
+		cook.position = Vector2(300 + 500*i, 300)
+		add_child(cook)
+		cooks.push_back(cook)
+		cooks_inventory.push_back("")
+		kitchen["COOK" + str(i)] = cook
 
 func spawn_station(station_type: String, pos: Vector2, secondary = null):
 	var station = station_scene.instantiate()

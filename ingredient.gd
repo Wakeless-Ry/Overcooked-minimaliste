@@ -6,7 +6,7 @@ var texture = null
 	
 func choose_sprite(ingredient_type):
 	match ingredient_type :
-		Enum.Ingredient_type.HAM :
+		Enum.Ingredient_type.BEEF :
 			return textures[0]
 		Enum.Ingredient_type.TOMATO :
 			return textures[1]

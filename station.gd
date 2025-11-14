@@ -15,7 +15,7 @@ var inventory = []
 
 var ingrDict = {
 	"BURGER" : ["BREAD", "COOKED_BEEF", "LETTUCE_CUT", "CHEESE", "TOMATO_CUT"],
-	"SOUP" : ["LETTUCE_CUT", "POTATO_CUT", "TOMATO_CUT"],
+	"SOUP" : ["LETTUCE_CUT", "POTATO_CUT", "TOMATO_CUT", "BEEF"],
 }
 
 func _ready():
@@ -73,8 +73,11 @@ func interact(item):
 				"BEEF":
 					return "COOKED_BEEF"
 		Enum.StationType.STOVE_POT:
-			inventory.append(item)
-			return pot_recipe()
+			if item == "":
+				return pot_recipe()
+			else:
+				inventory.append(item)
+				return ""
 		Enum.StationType.OVEN:
 			pass
 		Enum.StationType.MIXING_STATION:
@@ -82,8 +85,11 @@ func interact(item):
 		Enum.StationType.DELIVERY_TABLE:
 			pass
 		Enum.StationType.PLATE:
-			inventory.append(item)
-			return plate_recipe()
+			if item == "":
+				return plate_recipe()
+			else:
+				inventory.append(item)
+				return ""
 		_:
 			pass
 	return ""
