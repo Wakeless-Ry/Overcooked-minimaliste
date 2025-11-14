@@ -6,6 +6,10 @@ var station_scene = preload("res://station.tscn")
 var cook_scene = preload("res://cook.tscn")
 var objectif_scene = preload("res://objectif.tscn")
 
+var nombre_recette = 0
+var time_start = 0
+var time_now = 0
+
 var cooks = []
 var cooks_inventory = []
 
@@ -18,6 +22,18 @@ var recipe = null
 var objectif = null
 
 func _process(delta):
+	time_now = Time.get_unix_time_from_system()
+	var time_elapsed = time_now - time_start
+	var nb_recette_minute = 0
+	if time_elapsed != 0 :
+		nb_recette_minute = (60 * nombre_recette) / time_elapsed 
+	$Label.text = "Nombres de recettes réalisées : " + str(nombre_recette) + "\n" 
+	$Label.text +="Nb de recettes réalisées par minute : " + str(nb_recette_minute).pad_decimals(2) + "\n"
+	$Label.text +="Temps écoulé : " + str(time_elapsed).pad_decimals(2) + "s"
+
+	
+
+	
 	if recipe == null:
 		recipe = recipes.pick_random()
 	display()
@@ -47,6 +63,7 @@ func _process(delta):
 				cooks_inventory[i] = kitchen[action[1]].interact(cooks_inventory[i])
 				if action[1] == "DELIVERY_TABLE":
 					recipe = recipes.pick_random()
+					nombre_recette +=1
 
 func display():
 	if objectif != null:
@@ -55,7 +72,12 @@ func display():
 	objectif.adjust_size(50, Enum.dictIngredient[recipe.name])
 	add_child(objectif)
 
+
 func _ready():
+	$Label.text = "Nombres de recettes réalisées : " + str(nombre_recette)
+	$Label.position = Vector2(750,2)
+	time_start = Time.get_unix_time_from_system()
+
 	spawn_station("DELIVERY_TABLE", Vector2(100, 300))
 	
 	spawn_station("STOVE_PAN", Vector2(350, 100))

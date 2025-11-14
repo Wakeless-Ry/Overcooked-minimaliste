@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://dwfcasrnq8116"]
 
 [ext_resource type="Script" uid="uid://bw5m03q1l3rwq" path="res://world.gd" id="1_f3sb7"]
-[ext_resource type="Texture2D" uid="uid://d221sg5yokd4s" path="res://sprite/mosaic_floor.jpg" id="4_aqk2v"]
+[ext_resource type="Texture2D" uid="uid://b16wrf0ailieu" path="res://sprite/nouveau_sol.png" id="2_fj7yv"]
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_f3sb7")
@@ -9,6 +9,11 @@ script = ExtResource("1_f3sb7")
 [node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 1500.0
 offset_bottom = 1500.0
-texture = ExtResource("4_aqk2v")
+texture = ExtResource("2_fj7yv")
 expand_mode = 1
 stretch_mode = 1
+
+[node name="Label" type="Label" parent="."]
+offset_right = 229.0
+offset_bottom = 23.0
+text = "nombre de recettes réalisées:"
