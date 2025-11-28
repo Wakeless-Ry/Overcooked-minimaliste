@@ -36,7 +36,9 @@ func _process(delta):
 	display()
 	
 	for i in range(nb_cooks):
-		if i == 0:
+		if nb_cooks ==1: 
+			cooks[i].give_environment(kitchen, cooks_inventory[i], recipe)
+		elif i == 0 :
 			var new_kitchen = kitchen.duplicate()
 			new_kitchen.erase("CUTTING_BOARD")
 			new_kitchen.erase("CRATE_POTATO")
