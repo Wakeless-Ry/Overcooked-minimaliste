@@ -59,26 +59,35 @@ func _ready():
 		["BREAD", "PLATE"]: [["", "CRATE_BREAD"]],
 	}
 	
-	var recette_name_sushi = "sushi"
+	var recette_name_sushi = "SUSHI"
 	
 	var recette_steps_sushi = {
-		["sushi_in_plate", "table"]: [["", "sushi_in_plate"]],
+		"OBJECTIVE": ["SUSHI", "DELIVERY_TABLE"],
+		["SUSHI", "DELIVERY_TABLE"]:[["", "PLATE", ["COOKED_RICE", "NORI", "FISH_CUT", "CUCUMBER_CUT"]]],
 		
-		["", "sushi_in_plate"]: [
-			["cooked_rice", "table_cook"],
-			["fish_cut", "table_cut"],
-			["cucumber_cut", "table_cut"], 
-			["nori", "station_nori"]
+		
+		["", "PLATE", ["COOKED_RICE", "NORI", "FISH_CUT", "CUCUMBER_CUT"]]: [
+			["COOKED_RICE", "PLATE"],
+			["NORI", "PLATE"],
+			["FISH_CUT", "PLATE"],
+			["CUCUMBER_CUT", "PLATE"]
 		],
 		
-		["cooked_rice", "caisse_rice"]: [["", "station_rice"]],
-		["cucumber_cut", "table_cut"]: [["", "station_cucumber"]],
-		["fish_cut", "table_cut"]: [["", "station_fish"]],
 
-		["", "station_rice"]: [],
-		["", "station_nori"]: [],
-		["", "station_fish"]: [],
-		["", "station_cucumber"]: []
+		["COOKED_RICE", "PLATE"]: [["", "COOKED_RICE"]],
+		["", "COOKED_RICE"]: [["RICE", "STOVE_POT"]],
+
+		["FISH_CUT", "PLATE"]: [["", "FISH_CUT"]],
+		["", "FISH_CUT"]: [["FISH", "CUTTING_BOARD"]],
+		
+		["CUCUMBER_CUT", "PLATE"]: [["", "CUCUMBER_CUT"]],
+		["", "CUCUMBER_CUT"]: [["CUCUMBER", "CUTTING_BOARD"]],
+		
+		["RICE", "STOVE_POT"]: [["", "CRATE_RICE"]],
+		["NORI", "PLATE"]: [["", "CRATE_NORI"]],
+		["FISH", "CUTTING_BOARD"]: [["", "CRATE_FISH"]],
+		["CUCUMBER", "CUTTING_BOARD"]: [["", "CRATE_CUCUMBER"]]
+		
 	}
 
 	var recette = Recette.new()
