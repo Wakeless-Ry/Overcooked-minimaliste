@@ -75,7 +75,7 @@ func _ready():
 		
 
 		["COOKED_RICE", "PLATE"]: [["", "COOKED_RICE"]],
-		["", "COOKED_RICE"]: [["RICE", "STOVE_POT"]],
+		["", "COOKED_RICE"]: [["RICE", "STOVE_PAN"]],
 
 		["FISH_CUT", "PLATE"]: [["", "FISH_CUT"]],
 		["", "FISH_CUT"]: [["FISH", "CUTTING_BOARD"]],
@@ -83,7 +83,7 @@ func _ready():
 		["CUCUMBER_CUT", "PLATE"]: [["", "CUCUMBER_CUT"]],
 		["", "CUCUMBER_CUT"]: [["CUCUMBER", "CUTTING_BOARD"]],
 		
-		["RICE", "STOVE_POT"]: [["", "CRATE_RICE"]],
+		["RICE", "STOVE_PAN"]: [["", "CRATE_RICE"]],
 		["NORI", "PLATE"]: [["", "CRATE_NORI"]],
 		["FISH", "CUTTING_BOARD"]: [["", "CRATE_FISH"]],
 		["CUCUMBER", "CUTTING_BOARD"]: [["", "CRATE_CUCUMBER"]]

@@ -16,6 +16,7 @@ var inventory = []
 var ingrDict = {
 	"BURGER" : ["BREAD", "COOKED_BEEF", "LETTUCE_CUT", "CHEESE", "TOMATO_CUT"],
 	"SOUP" : ["LETTUCE_CUT", "POTATO_CUT", "TOMATO_CUT", "BEEF"],
+	"SUSHI" : ["COOKED_RICE", "NORI", "FISH_CUT", "CUCUMBER_CUT"]
 }
 
 func _ready():
@@ -68,10 +69,16 @@ func interact(item):
 					return "TOMATO_CUT"
 				"POTATO":
 					return "POTATO_CUT"
+				"FISH":
+					return "FISH_CUT"
+				"CUCUMBER":
+					return "CUCUMBER_CUT"
 		Enum.StationType.STOVE_PAN:
 			match item:
 				"BEEF":
 					return "COOKED_BEEF"
+				"RICE":
+					return "COOKED_RICE"
 		Enum.StationType.STOVE_POT:
 			if item == "":
 				return pot_recipe()
@@ -97,7 +104,10 @@ func interact(item):
 func plate_recipe():
 	if lists_have_same_items_with_counts(inventory, ingrDict["BURGER"]):
 		inventory = []
-		return "BURGER"
+		return "BURGER" 
+	elif  lists_have_same_items_with_counts(inventory, ingrDict["SUSHI"]):
+		inventory = []
+		return "SUSHI"
 	return ""
 	
 func pot_recipe():

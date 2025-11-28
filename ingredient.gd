@@ -34,6 +34,20 @@ func choose_sprite(ingredient_type):
 			return textures[12]
 		Enum.Ingredient_type.POTATO_CUT :
 			return textures[13]
+		Enum.Ingredient_type.RICE :
+			return textures[14]
+		Enum.Ingredient_type.COOKED_RICE :
+			return textures[15]
+		Enum.Ingredient_type.NORI :
+			return textures[16]
+		Enum.Ingredient_type.FISH :
+			return textures[17]
+		Enum.Ingredient_type.CUCUMBER :
+			return textures[18]
+		Enum.Ingredient_type.FISH_CUT :
+			return textures[19]
+		Enum.Ingredient_type.CUCUMBER_CUT :
+			return textures[20]
 	
 func adjust_size(size, other):
 	var sprite = $Sprite2D

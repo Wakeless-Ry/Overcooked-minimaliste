@@ -12,14 +12,15 @@ var cooks_inventory = []
 var nb_cooks = 2
 
 var kitchen = {}
-var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres")]
+var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres"),load("res://recettes/SUSHI.tres")]
 var recipe = null
 
 var objectif = null
 
 func _process(delta):
 	if recipe == null:
-		recipe = recipes.pick_random()
+		#recipe = recipes.pick_random()
+		recipe = recipes[2]
 	display()
 	
 	for i in range(nb_cooks):
@@ -29,6 +30,8 @@ func _process(delta):
 			new_kitchen.erase("CRATE_POTATO")
 			new_kitchen.erase("CRATE_LETTUCE")
 			new_kitchen.erase("CRATE_TOMATO")
+			new_kitchen.erase("CRATE_FISH")
+			new_kitchen.erase("CRATE_CUCUMBER")
 			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
 		else:
 			var new_kitchen = kitchen.duplicate()
@@ -37,6 +40,8 @@ func _process(delta):
 			new_kitchen.erase("CRATE_CHEESE")
 			new_kitchen.erase("CRATE_BEEF")
 			new_kitchen.erase("CRATE_BREAD")
+			new_kitchen.erase("CRATE_RICE")
+			new_kitchen.erase("CRATE_NORI")
 			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
 		var action = cooks[i].get_agent_action(delta)
 		
@@ -47,6 +52,8 @@ func _process(delta):
 				cooks_inventory[i] = kitchen[action[1]].interact(cooks_inventory[i])
 				if action[1] == "DELIVERY_TABLE":
 					recipe = recipes.pick_random()
+					for j in range(nb_cooks):
+						cooks_inventory[j] = ""
 
 func display():
 	if objectif != null:
@@ -60,9 +67,11 @@ func _ready():
 	
 	spawn_station("STOVE_PAN", Vector2(350, 100))
 	
+	spawn_station("CRATE", Vector2(150, 600), "NORI")
 	spawn_station("CRATE", Vector2(250, 600), "CHEESE")
 	spawn_station("CRATE", Vector2(350, 600), "BEEF")
 	spawn_station("CRATE", Vector2(450, 600), "BREAD")
+	spawn_station("CRATE", Vector2(550, 600), "RICE")
 	
 	spawn_station("STOVE_POT", Vector2(576, 216))
 	spawn_station("PLATE", Vector2(576, 432))
@@ -72,6 +81,9 @@ func _ready():
 	spawn_station("CRATE", Vector2(700, 600), "TOMATO")
 	spawn_station("CRATE", Vector2(800, 600), "LETTUCE")
 	spawn_station("CRATE", Vector2(900, 600), "POTATO")
+	
+	spawn_station("CRATE", Vector2(1000, 600), "FISH")
+	spawn_station("CRATE", Vector2(1100, 600), "CUCUMBER")
 	
 	#spawn_station("OVEN", Vector2(200, 100))
 	#spawn_station("CRATE", Vector2(1000, 425), "CARROT")
