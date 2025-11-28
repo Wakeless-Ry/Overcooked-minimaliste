@@ -31,9 +31,6 @@ func _process(delta):
 	$Label.text +="Nb de recettes réalisées par minute : " + str(nb_recette_minute).pad_decimals(2) + "\n"
 	$Label.text +="Temps écoulé : " + str(time_elapsed).pad_decimals(2) + "s"
 
-	
-
-	
 	if recipe == null:
 		recipe = recipes.pick_random()
 	display()
