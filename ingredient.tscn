@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://dsxduajy4lwiu"]
+[gd_scene load_steps=22 format=3 uid="uid://dsxduajy4lwiu"]
 
 [ext_resource type="Script" uid="uid://darehf17n8fk" path="res://ingredient.gd" id="1_11e83"]
 [ext_resource type="Texture2D" uid="uid://t5uh1ymlcyjh" path="res://sprite/beef.png" id="2_21dxx"]
@@ -15,9 +15,15 @@
 [ext_resource type="Texture2D" uid="uid://b75f2i5w0nydn" path="res://sprite/lettuce_cut.png" id="13_4ikp3"]
 [ext_resource type="Texture2D" uid="uid://dthoyaija2bh5" path="res://sprite/tomato_cut.png" id="14_ek5sh"]
 [ext_resource type="Texture2D" uid="uid://c5xx5y03yxai3" path="res://sprite/potato_cut.png" id="15_jgtt6"]
+[ext_resource type="Texture2D" uid="uid://cjbbfr6taxars" path="res://sprite/rice.png" id="16_4ikp3"]
+[ext_resource type="Texture2D" uid="uid://ba0nxy7ah31he" path="res://sprite/cooked_rice.png" id="17_jmklr"]
+[ext_resource type="Texture2D" uid="uid://bbiv3retp04mn" path="res://sprite/nori.png" id="18_poib1"]
+[ext_resource type="Texture2D" uid="uid://b26a10nviqdky" path="res://sprite/fish.png" id="19_yi14y"]
+[ext_resource type="Texture2D" uid="uid://uqp481xqtrc8" path="res://sprite/cucumber.png" id="20_erhdq"]
+[ext_resource type="Texture2D" uid="uid://bgx5nbylxhuaq" path="res://sprite/fish_cut.png" id="21_6hbe8"]
 
 [node name="Ingredient" type="Node2D"]
 script = ExtResource("1_11e83")
-textures = Array[Texture2D]([ExtResource("2_21dxx"), ExtResource("3_luq5u"), ExtResource("4_21dxx"), ExtResource("5_ngxxb"), ExtResource("6_luq5u"), ExtResource("7_21dxx"), ExtResource("8_ngxxb"), ExtResource("9_mwf5c"), ExtResource("10_gr20n"), ExtResource("11_magpw"), ExtResource("12_b18kv"), ExtResource("13_4ikp3"), ExtResource("14_ek5sh"), ExtResource("15_jgtt6")])
+textures = Array[Texture2D]([ExtResource("2_21dxx"), ExtResource("3_luq5u"), ExtResource("4_21dxx"), ExtResource("5_ngxxb"), ExtResource("6_luq5u"), ExtResource("7_21dxx"), ExtResource("8_ngxxb"), ExtResource("9_mwf5c"), ExtResource("10_gr20n"), ExtResource("11_magpw"), ExtResource("12_b18kv"), ExtResource("13_4ikp3"), ExtResource("14_ek5sh"), ExtResource("15_jgtt6"), ExtResource("16_4ikp3"), ExtResource("17_jmklr"), ExtResource("18_poib1"), ExtResource("19_yi14y"), ExtResource("20_erhdq"), ExtResource("21_6hbe8"), ExtResource("13_4ikp3")])
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
