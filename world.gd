@@ -32,8 +32,7 @@ func _process(delta):
 	$Label.text +="Temps écoulé : " + str(time_elapsed).pad_decimals(2) + "s"
 
 	if recipe == null:
-		#recipe = recipes.pick_random()
-		recipe = recipes[2]
+		recipe = recipes.pick_random()
 	display()
 	
 	for i in range(nb_cooks):
@@ -67,7 +66,8 @@ func _process(delta):
 					recipe = recipes.pick_random()
 					nombre_recette +=1
 					for j in range(nb_cooks):
-						cooks_inventory[j] = ""
+						if (cooks[j].check_new_recipe(recipe)):
+							cooks_inventory[j] = ""
 
 func display():
 	if objectif != null:

@@ -43,6 +43,14 @@ func check_plate(step):
 	if ((step[1] == "PLATE" && step[1] in kitchen) || (step[1] == "STOVE_POT" && step[1] in kitchen)) && step[0] != "":
 		return kitchen[step[1]].needs_ingredient(recipe_name, step[0])
 	return true
+	
+func check_new_recipe(new_recipe):
+	if (inventory == ""):
+		return false
+	for key in new_recipe.steps.keys():
+		if key is Array and key.size() > 0 and key[0] == inventory:
+			return false
+	return true
 
 func give_environment(kitchen_env, inventory_env, recipe_env):
 	var old = inventory
