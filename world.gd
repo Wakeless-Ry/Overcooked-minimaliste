@@ -13,7 +13,7 @@ var time_now = 0
 var cooks = []
 var cooks_inventory = []
 
-var nb_cooks = 2
+var nb_cooks = 4
 
 var kitchen = {}
 var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres"),load("res://recettes/SUSHI.tres")]
@@ -38,25 +38,112 @@ func _process(delta):
 	for i in range(nb_cooks):
 		if nb_cooks ==1: 
 			cooks[i].give_environment(kitchen, cooks_inventory[i], recipe)
-		elif i == 0 :
-			var new_kitchen = kitchen.duplicate()
-			new_kitchen.erase("CUTTING_BOARD")
-			new_kitchen.erase("CRATE_POTATO")
-			new_kitchen.erase("CRATE_LETTUCE")
-			new_kitchen.erase("CRATE_TOMATO")
-			new_kitchen.erase("CRATE_FISH")
-			new_kitchen.erase("CRATE_CUCUMBER")
-			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
-		else:
-			var new_kitchen = kitchen.duplicate()
-			new_kitchen.erase("STOVE_PAN")
-			new_kitchen.erase("DELIVERY_TABLE")
-			new_kitchen.erase("CRATE_CHEESE")
-			new_kitchen.erase("CRATE_BEEF")
-			new_kitchen.erase("CRATE_BREAD")
-			new_kitchen.erase("CRATE_RICE")
-			new_kitchen.erase("CRATE_NORI")
-			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+		elif nb_cooks == 2:
+			if i == 0 :
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("CUTTING_BOARD")
+				new_kitchen.erase("CRATE_POTATO")
+				new_kitchen.erase("CRATE_LETTUCE")
+				new_kitchen.erase("CRATE_TOMATO")
+				new_kitchen.erase("CRATE_FISH")
+				new_kitchen.erase("CRATE_CUCUMBER")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			else:
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("STOVE_PAN")
+				new_kitchen.erase("DELIVERY_TABLE")
+				new_kitchen.erase("CRATE_CHEESE")
+				new_kitchen.erase("CRATE_BEEF")
+				new_kitchen.erase("CRATE_BREAD")
+				new_kitchen.erase("CRATE_RICE")
+				new_kitchen.erase("CRATE_NORI")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+		elif nb_cooks == 3:
+			if i == 0 :
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("CUTTING_BOARD")
+				new_kitchen.erase("CRATE_POTATO")
+				new_kitchen.erase("CRATE_LETTUCE")
+				new_kitchen.erase("CRATE_TOMATO")
+				new_kitchen.erase("CRATE_FISH")
+				new_kitchen.erase("CRATE_CUCUMBER")
+				new_kitchen.erase("DELIVERY_TABLE")
+				new_kitchen.erase("CRATE_RICE")
+				new_kitchen.erase("CRATE_BREAD")
+				new_kitchen.erase("CRATE_POTATO")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			elif i == 1:
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("STOVE_PAN")
+				new_kitchen.erase("DELIVERY_TABLE")
+				new_kitchen.erase("CRATE_CHEESE")
+				new_kitchen.erase("CRATE_BEEF")
+				new_kitchen.erase("CRATE_BREAD")
+				new_kitchen.erase("CRATE_RICE")
+				new_kitchen.erase("CRATE_NORI")
+				new_kitchen.erase("CRATE_POTATO")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			else :
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("CRATE_NORI")
+				new_kitchen.erase("CRATE_BEEF")
+				new_kitchen.erase("CRATE_CHEESE")
+				new_kitchen.erase("CRATE_LETTUCE")
+				new_kitchen.erase("CRATE_TOMATO")
+				new_kitchen.erase("CRATE_FISH")
+				new_kitchen.erase("CRATE_CUCUMBER")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+		else: # pour les quatres 
+			if i == 0 :
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("CUTTING_BOARD")
+				new_kitchen.erase("CRATE_POTATO")
+				new_kitchen.erase("CRATE_LETTUCE")
+				new_kitchen.erase("CRATE_TOMATO")
+				new_kitchen.erase("CRATE_FISH")
+				new_kitchen.erase("CRATE_CUCUMBER")
+				new_kitchen.erase("DELIVERY_TABLE")
+				new_kitchen.erase("CRATE_RICE")
+				new_kitchen.erase("CRATE_BREAD")
+				new_kitchen.erase("CRATE_POTATO")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			elif i == 1:
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("STOVE_PAN")
+				new_kitchen.erase("DELIVERY_TABLE")
+				new_kitchen.erase("CRATE_CHEESE")
+				new_kitchen.erase("CRATE_BEEF")
+				new_kitchen.erase("CRATE_BREAD")
+				new_kitchen.erase("CRATE_RICE")
+				new_kitchen.erase("CRATE_NORI")
+				new_kitchen.erase("CRATE_POTATO")
+				new_kitchen.erase("CRATE_CUCUMBER")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			elif i == 2 :
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("CRATE_NORI")
+				new_kitchen.erase("CRATE_BEEF")
+				new_kitchen.erase("CRATE_CHEESE")
+				new_kitchen.erase("CRATE_LETTUCE")
+				new_kitchen.erase("CRATE_TOMATO")
+				new_kitchen.erase("CRATE_FISH")
+				new_kitchen.erase("CRATE_CUCUMBER")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			else:
+				var new_kitchen = kitchen.duplicate()
+				new_kitchen.erase("CRATE_NORI")
+				new_kitchen.erase("CRATE_BEEF")
+				new_kitchen.erase("CRATE_CHEESE")
+				new_kitchen.erase("CRATE_BREAD")
+				new_kitchen.erase("CRATE_LETTUCE")
+				new_kitchen.erase("CRATE_TOMATO")
+				new_kitchen.erase("CRATE_FISH")
+				new_kitchen.erase("CRATE_RICE")
+				new_kitchen.erase("CRATE_POTATO")
+				new_kitchen.erase("DELIVERY_TABLE")
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+
+
 		var action = cooks[i].get_agent_action(delta)
 		
 		match action[0]:
@@ -111,7 +198,12 @@ func _ready():
 	
 	for i in range(nb_cooks):
 		var cook = cook_scene.instantiate()
-		cook.position = Vector2(300 + 500*i, 300)
+		if nb_cooks == 3:
+			cook.position = Vector2(300 + 250*i, 300)
+		elif nb_cooks == 4:
+			cook.position = Vector2(300 + 125*i, 300)
+		else: 
+			cook.position = Vector2(300 + 500*i, 300)
 		add_child(cook)
 		cooks.push_back(cook)
 		cooks_inventory.push_back("")
