@@ -18,6 +18,11 @@ var nb_cooks = 4
 var kitchen = {}
 var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres"),load("res://recettes/SUSHI.tres")]
 var recipe = null
+var old_recipe = null;
+var is_recipe_finished = false;
+var has_generated_new_recipe = false;
+var nb_cook_finish_recette;
+
 
 var objectif = null
 
@@ -35,9 +40,13 @@ func _process(delta):
 		recipe = recipes.pick_random()
 	display()
 	
+	var current_recette
 	for i in range(nb_cooks):
+		current_recette = recipe
+		if(i == nb_cook_finish_recette && has_generated_new_recipe):
+			current_recette = old_recipe
 		if nb_cooks ==1: 
-			cooks[i].give_environment(kitchen, cooks_inventory[i], recipe)
+			cooks[i].give_environment(kitchen, cooks_inventory[i], current_recette)
 		elif nb_cooks == 2:
 			if i == 0 :
 				var new_kitchen = kitchen.duplicate()
@@ -47,7 +56,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_TOMATO")
 				new_kitchen.erase("CRATE_FISH")
 				new_kitchen.erase("CRATE_CUCUMBER")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 			else:
 				var new_kitchen = kitchen.duplicate()
 				new_kitchen.erase("STOVE_PAN")
@@ -57,7 +66,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_BREAD")
 				new_kitchen.erase("CRATE_RICE")
 				new_kitchen.erase("CRATE_NORI")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 		elif nb_cooks == 3:
 			if i == 0 :
 				var new_kitchen = kitchen.duplicate()
@@ -71,7 +80,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_RICE")
 				new_kitchen.erase("CRATE_BREAD")
 				new_kitchen.erase("CRATE_POTATO")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 			elif i == 1:
 				var new_kitchen = kitchen.duplicate()
 				new_kitchen.erase("STOVE_PAN")
@@ -82,7 +91,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_RICE")
 				new_kitchen.erase("CRATE_NORI")
 				new_kitchen.erase("CRATE_POTATO")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 			else :
 				var new_kitchen = kitchen.duplicate()
 				new_kitchen.erase("CRATE_NORI")
@@ -92,7 +101,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_TOMATO")
 				new_kitchen.erase("CRATE_FISH")
 				new_kitchen.erase("CRATE_CUCUMBER")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 		else: # pour les quatres 
 			if i == 0 :
 				var new_kitchen = kitchen.duplicate()
@@ -106,7 +115,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_RICE")
 				new_kitchen.erase("CRATE_BREAD")
 				new_kitchen.erase("CRATE_POTATO")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 			elif i == 1:
 				var new_kitchen = kitchen.duplicate()
 				new_kitchen.erase("STOVE_PAN")
@@ -118,7 +127,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_NORI")
 				new_kitchen.erase("CRATE_POTATO")
 				new_kitchen.erase("CRATE_CUCUMBER")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 			elif i == 2 :
 				var new_kitchen = kitchen.duplicate()
 				new_kitchen.erase("CRATE_NORI")
@@ -128,7 +137,7 @@ func _process(delta):
 				new_kitchen.erase("CRATE_TOMATO")
 				new_kitchen.erase("CRATE_FISH")
 				new_kitchen.erase("CRATE_CUCUMBER")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 			else:
 				var new_kitchen = kitchen.duplicate()
 				new_kitchen.erase("CRATE_NORI")
@@ -141,10 +150,15 @@ func _process(delta):
 				new_kitchen.erase("CRATE_RICE")
 				new_kitchen.erase("CRATE_POTATO")
 				new_kitchen.erase("DELIVERY_TABLE")
-				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
-
+				is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], current_recette)
 
 		var action = cooks[i].get_agent_action(delta)
+		
+		if(is_recipe_finished && has_generated_new_recipe == false):
+			nb_cook_finish_recette = i
+			old_recipe = recipe
+			recipe = recipes.pick_random()
+			has_generated_new_recipe = true
 		
 		match action[0]:
 			"deplacement":
@@ -152,11 +166,11 @@ func _process(delta):
 			"interagir":
 				cooks_inventory[i] = kitchen[action[1]].interact(cooks_inventory[i])
 				if action[1] == "DELIVERY_TABLE":
-					recipe = recipes.pick_random()
+					cooks_inventory[i] = ""
 					nombre_recette +=1
-					for j in range(nb_cooks):
-						if (cooks[j].check_new_recipe(recipe)):
-							cooks_inventory[j] = ""
+					is_recipe_finished = false
+					has_generated_new_recipe = false
+
 
 func display():
 	if objectif != null:
