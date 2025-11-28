@@ -52,8 +52,9 @@ func give_environment(kitchen_env, inventory_env, recipe_env):
 	recipe_name = recipe_env.name
 	var current = get_next_step(recipe, recipe["OBJECTIVE"])
 	state = "waiting" if current == null else current[1]
-	
 	display_inv(old)
+	if current == recipe["OBJECTIVE"]:
+		return true
 
 func display_inv(old):
 	if ingredient != null:

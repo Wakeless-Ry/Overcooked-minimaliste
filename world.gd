@@ -13,16 +13,19 @@ var nb_cooks = 2
 
 var kitchen = {}
 var recipes = [load("res://recettes/BURGER.tres"), load("res://recettes/SOUP.tres"),load("res://recettes/SUSHI.tres")]
-var recipe = null
+var recipe = null;
+var new_recipe = null;
 
-var objectif = null
+var objectif = null;
+var is_recipe_finished = false;
+var has_generated_new_recipe = false;
 
 func _process(delta):
 	if recipe == null:
-		#recipe = recipes.pick_random()
-		recipe = recipes[2]
+		#recipe.push_back(recipes.pick_random())
+		recipe = recipes.pick_random()
 	display()
-	
+
 	for i in range(nb_cooks):
 		if i == 0:
 			var new_kitchen = kitchen.duplicate()
@@ -32,7 +35,10 @@ func _process(delta):
 			new_kitchen.erase("CRATE_TOMATO")
 			new_kitchen.erase("CRATE_FISH")
 			new_kitchen.erase("CRATE_CUCUMBER")
-			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			is_recipe_finished = cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			if (is_recipe_finished && !has_generated_new_recipe):
+				new_recipe = recipes.pick_random()
+				has_generated_new_recipe = true
 		else:
 			var new_kitchen = kitchen.duplicate()
 			new_kitchen.erase("STOVE_PAN")
@@ -42,7 +48,11 @@ func _process(delta):
 			new_kitchen.erase("CRATE_BREAD")
 			new_kitchen.erase("CRATE_RICE")
 			new_kitchen.erase("CRATE_NORI")
-			cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+			if is_recipe_finished:
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], new_recipe)
+			else:
+				cooks[i].give_environment(new_kitchen, cooks_inventory[i], recipe)
+		
 		var action = cooks[i].get_agent_action(delta)
 		
 		match action[0]:
@@ -51,15 +61,20 @@ func _process(delta):
 			"interagir":
 				cooks_inventory[i] = kitchen[action[1]].interact(cooks_inventory[i])
 				if action[1] == "DELIVERY_TABLE":
-					recipe = recipes.pick_random()
-					for j in range(nb_cooks):
-						cooks_inventory[j] = ""
+					cooks_inventory[i] = ""
+					recipe = new_recipe
+					is_recipe_finished = false
+					has_generated_new_recipe = false
+					#for j in range(nb_cooks):
+						#cooks_inventory[j] = ""
 
 func display():
 	if objectif != null:
 		remove_child(objectif)
 	objectif = objectif_scene.instantiate()
 	objectif.adjust_size(50, Enum.dictIngredient[recipe.name])
+	if new_recipe != null:
+		objectif.adjust_size(50, Enum.dictIngredient[new_recipe.name])
 	add_child(objectif)
 
 func _ready():
